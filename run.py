@@ -25,7 +25,7 @@ if __name__ == '__main__':
     port = 6060
     if len(sys.argv) > 1:
         port = sys.argv[1]
-    sockets = tornado.netutil.bind_sockets(port)
+    sockets = tornado.netutil.bind_sockets(int(port))
     tornado.process.fork_processes(5)
     http_server = tornado.httpserver.HTTPServer(application)
     # application.listen(port)
