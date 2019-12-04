@@ -27,7 +27,7 @@ test_db_config = {
 }
 
 REDIS_CONFIG = {
-    'host': '47.105.104.233',
+    'host': 'localhost',
     'port': 6379,
     'password': '1q2w3e4r!'
 }
