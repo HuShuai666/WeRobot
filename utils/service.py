@@ -2,7 +2,7 @@
 import json
 
 import requests
-from src.config.settings import micro_service_domain, APP_ID, APP_SECRET
+from config.settings import micro_service_domain, APP_ID, APP_SECRET
 from utils.functions import redis_client
 
 

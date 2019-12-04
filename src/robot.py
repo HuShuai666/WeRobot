@@ -1,7 +1,7 @@
 # coding:utf-8
 from werobot import WeRoBot
 from werobot.replies import SuccessReply
-from src.config.settings import APP_ID, APP_SECRET
+from config.settings import APP_ID, APP_SECRET
 from src.functions import handle_text_message, handle_image_message, subscribe_message_func, un_subscribe_message_func
 
 config = dict(
