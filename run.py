@@ -18,7 +18,7 @@ from src.robot import robot
 define('port', default=6060, type=int)
 
 application = tornado.web.Application([
-    (r'/weixin/', make_handler(robot)),
+    (r'/weixin11/', make_handler(robot)),
 
 ])
 

@@ -5,7 +5,7 @@ from src.config.settings import APP_ID, APP_SECRET
 from src.functions import handle_text_message, handle_image_message, subscribe_message_func, un_subscribe_message_func
 
 config = dict(
-    TOKEN='northamericastudent123456',
+    TOKEN='hushuai_cs',
     SERVER="tornado",
     HOST="0.0.0.0",
     PORT="6060",
