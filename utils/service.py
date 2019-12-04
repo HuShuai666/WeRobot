@@ -3,6 +3,7 @@ import json
 
 import requests
 from src.config.settings import micro_service_domain, APP_ID, APP_SECRET
+from utils.functions import redis_client
 
 
 class BaseHttpServer:
@@ -23,10 +24,15 @@ class WeixinServer:
     @staticmethod
     def get_access_token():
         """获取access_token"""
-        url = "%s/api/weixin/service_center/access_token/" % micro_service_domain
-        params = {'app_id': APP_ID, 'app_secret': APP_SECRET}
-        data = BaseHttpServer.get(url, params)
-        return data['access_token']
+        hu_access_token = redis_client.get_instance('hu_access_token')
+        if hu_access_token:
+            return hu_access_token
+        else:
+            url = "%s/api/weixin/service_center/access_token/" % micro_service_domain
+            params = {'app_id': APP_ID, 'app_secret': APP_SECRET}
+            data = BaseHttpServer.get(url, params)
+            redis_client.set_instance('hu_access_token', data['access_token'])
+            return data['access_token']
 
     @staticmethod
     def send_text_message(openid, content):

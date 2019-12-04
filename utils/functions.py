@@ -5,7 +5,7 @@ import redis
 from src.config.settings import test_db_config, REDIS_CONFIG, test_db_config
 
 
-redis_valid_time = 1 * 60 * 60
+redis_valid_time = 2 * 60 * 60
 
 
 # 连接数据库配置
