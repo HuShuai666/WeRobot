@@ -28,11 +28,22 @@ class WeixinServer:
         if hu_access_token:
             return hu_access_token
         else:
-            url = "%s/api/weixin/service_center/access_token/" % micro_service_domain
-            params = {'app_id': APP_ID, 'app_secret': APP_SECRET}
-            data = BaseHttpServer.get(url, params)
-            redis_client.set_instance('hu_access_token', data['access_token'])
-            return data['access_token']
+            url = "https://api.weixin.qq.com/cgi-bin/token"
+            params = {
+                'appid': APP_ID,
+                'secret': APP_SECRET,
+                'grant_type': 'client_credential'
+            }
+            response = BaseHttpServer.get(url, params)
+            res = response.json()
+            redis_client.set_instance('hu_access_token', res['access_token'])
+            return res['access_token']
+
+
+
+
+
+
 
     @staticmethod
     def send_text_message(openid, content):
