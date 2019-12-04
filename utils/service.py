@@ -34,7 +34,7 @@ class WeixinServer:
                 'secret': APP_SECRET,
                 'grant_type': 'client_credential'
             }
-            response = BaseHttpServer.get(url, params)
+            response = requests.get(url, params)
             res = response.json()
             redis_client.set_instance('hu_access_token', res['access_token'])
             return res['access_token']
