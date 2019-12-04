@@ -43,6 +43,7 @@ def handle_text_message(message):
 
         url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % hu_access_token
         response = requests.post(url=url, params=params, verify=False)
+        print(response.status_code)
         return """创建菜单成功"""
     return
 
