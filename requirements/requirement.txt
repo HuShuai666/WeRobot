@@ -1,6 +1,6 @@
 pika==0.10.0
 PyMySQL==0.7.11
-requests==2.17.3
+requests==2.20.0
 sqlparse==0.2.3
 tornado==4.5.1
 WeRoBot==1.1.1
