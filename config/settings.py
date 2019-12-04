@@ -51,7 +51,7 @@ class LogFormatter(tornado.log.LogFormatter):
 
 log = dict(
     # template_path=os.path.join(os.path.dirname(__file__), 'templates'),  # 设置模板路径
-    log_path=os.path.join(os.path.dirname(__file__), "log"),
+    log_path=os.path.join(os.path.dirname(__file__), "logs"),
     # static_url_prefix='/myPath/static/', # 设置html中静态文件的引用路径，默认为/static/
     debug=True,
     # xsrf_cookies=True, //开启后werobot无法使用
