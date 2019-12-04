@@ -33,7 +33,6 @@ def main():
     # 控制台输出请求详情
     options.parse_command_line()
     [i.setFormatter(LogFormatter()) for i in logging.getLogger().handlers]
-
     sockets = tornado.netutil.bind_sockets(port)
     # tornado.process.fork_processes(5)
     app = Application()
