@@ -176,7 +176,6 @@ class WeixinServer:
         print(res)
         return
 
-    @staticmethod
     def get_openid(self):
         access_token = self.get_access_token()
         params = {'access_token': access_token}
