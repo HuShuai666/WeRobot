@@ -184,7 +184,7 @@ class WeixinServer:
         print(response.content)
         res = response.json()
         print(res)
-        openid_list = res['openid']
+        openid_list = res['data']['openid']
         openid = openid_list[0]
         print(openid)
         return openid
