@@ -183,8 +183,10 @@ class WeixinServer:
         response = requests.get(url=url, params=params, headers={'Content-Type': 'application/json', "charset": "UTF-8"})
         print(response.content)
         res = response.json()
-        openid_list = res['user_info_list']
-        openid = [data for data in openid_list if data['nickname'] == 'L'][0]
+        print(res)
+        openid_list = res['openid']
+        openid = openid_list[0]
+        print(openid)
         return openid
 
 
