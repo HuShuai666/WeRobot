@@ -6,6 +6,7 @@ from config.settings import micro_service_domain, APP_ID, APP_SECRET
 from utils.functions import redis_client
 
 
+# 对requests方法的重写  直接获取res的json字符串
 class BaseHttpServer:
     @staticmethod
     def get(url, params):
@@ -39,12 +40,6 @@ class WeixinServer:
             redis_client.set_instance('hu_access_token', res['access_token'])
             return res['access_token']
 
-
-
-
-
-
-
     @staticmethod
     def send_text_message(openid, content):
         """发送文本消息"""
@@ -57,17 +52,13 @@ class WeixinServer:
         return data
 
     @staticmethod
-    def send_template_message(openid, template_id, url, send_data):
-        """发送模板消息"""
-        json_data = {
-            'openid': openid,
-            'template_id': template_id,
-            'url': url,
-            'send_data': send_data
-        }
-        url = "%s/api/weixin/service_center/send_template_message/" % micro_service_domain
-        data = BaseHttpServer.post(url, json_data)
-        return data
+    # 调用微信接口向用户发送模板消息
+    def send_template_inform(self, params):
+        access_token = self.get_access_token()
+        url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s' % access_token
+        response = requests.post(url=url, data=json.dumps(params), headers={'Content-Type': 'application/json'})
+        res = response.json()
+        return response
 
     @staticmethod
     def code_authorize(code):
@@ -184,3 +175,17 @@ class WeixinServer:
         res = response.json()
         print(res)
         return
+
+    @staticmethod
+    def get_openid(self):
+        access_token = self.get_access_token()
+        params = {'access_token': access_token}
+        url = "https://api.weixin.qq.com/cgi-bin/user/info/batchget"
+        response = requests.post(url=url, data=json.dumps(params), headers={'Content-Type': 'application/json', "charset": "UTF-8"})
+        res = response.json()
+        openid_list = res['user_info_list']
+        openid = [data for data in openid_list if data['nickname'] == 'L'][0]
+        return openid
+
+
+WeiXin_Server = WeixinServer()

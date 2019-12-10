@@ -15,13 +15,13 @@ def handle_text_message(message):
         params = {
                 "button": [
                     {
-                        "type": "click",  # 一级菜单  点击事件
+                        "type": "click",
                         "name": "点点",
                         "key": "DIANDIAN"
                     },
                     {
-                        "name": "菜单",  # 一级菜单
-                        "sub_button": [  # 二级菜单
+                        "name": "菜单",
+                        "sub_button": [
                             {
                                 "type": "view",
                                 "name": "百度一下",
@@ -29,8 +29,8 @@ def handle_text_message(message):
                             },
                             {
                                 "type": "click",
-                                "name": "赞一下我们",
-                                "key": "V1001_GOOD"
+                                "name": "放假",
+                                "key": "holiday"
                             }]
                     },
                     {

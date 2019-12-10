@@ -9,6 +9,8 @@ REDIS_CONFIG = {
     'port':6379
 }
 
+
+# 暂时没用
 class RedisClient:
     @property
     def redis_client(self):

@@ -12,8 +12,8 @@ from src.robot import robot
 import logging
 from config import settings
 
+# 这里配置的是日志的路径，配置好后控制台的相应信息就会保存到目标路径中。
 options.log_file_prefix = os.path.join(os.path.dirname(__file__), 'logs/log.log')
-define('port', default=6060, type=int)
 
 
 class Application(tornado.web.Application):
@@ -22,7 +22,10 @@ class Application(tornado.web.Application):
             (r'/weixin/', make_handler(robot)),
 
         ]
-        super(Application, self).__init__(handlers, **settings.log)
+        super(Application, self).__init__(handlers, **settings.log)  # 加载settings配置
+
+
+define('port', default=6060, type=int)
 
 
 def main():
@@ -34,11 +37,8 @@ def main():
     options.parse_command_line()
     [i.setFormatter(LogFormatter()) for i in logging.getLogger().handlers]
     sockets = tornado.netutil.bind_sockets(port)
-    # tornado.process.fork_processes(5)
     app = Application()
     http_server = tornado.httpserver.HTTPServer(app)
-    # # application.listen(port)
-    # http_server.listen(options.port)
     http_server.add_sockets(sockets)
     tornado.ioloop.IOLoop.instance().start()
 
