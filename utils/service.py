@@ -51,13 +51,13 @@ class WeixinServer:
         data = BaseHttpServer.post(url, json_data)
         return data
 
-    @staticmethod
     # 调用微信接口向用户发送模板消息
     def send_template_inform(self, params):
         access_token = self.get_access_token()
         url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s' % access_token
         response = requests.post(url=url, data=json.dumps(params), headers={'Content-Type': 'application/json'})
-        res = response.json()
+        res = response.content
+        print(res)
         return response
 
     @staticmethod
