@@ -179,8 +179,9 @@ class WeixinServer:
     def get_openid(self):
         access_token = self.get_access_token()
         params = {'access_token': access_token}
-        url = "https://api.weixin.qq.com/cgi-bin/user/info/batchget"
-        response = requests.post(url=url, data=json.dumps(params), headers={'Content-Type': 'application/json', "charset": "UTF-8"})
+        url = "https://api.weixin.qq.com/cgi-bin/user/get"
+        response = requests.get(url=url, params=params, headers={'Content-Type': 'application/json', "charset": "UTF-8"})
+        print(response.content)
         res = response.json()
         openid_list = res['user_info_list']
         openid = [data for data in openid_list if data['nickname'] == 'L'][0]
