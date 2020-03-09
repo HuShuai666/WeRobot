@@ -43,9 +43,13 @@ def handle_text_message(message):
             }
 
         url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % hu_access_token
-        response = requests.post(url=url, data=json.dumps(params), verify=False)
-
-        return """创建菜单成功"""
+        response = requests.post(url=url, data=json.dumps(params, ensure_ascii=False).encode('utf-8'), verify=False)
+        result = response.read()
+        result = json.loads(result)
+        if result["errcode"] == 0:
+            return """创建菜单成功"""
+        else:
+            return """创建失败"""
     return
 
 
