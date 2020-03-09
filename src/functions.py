@@ -53,7 +53,7 @@ def handle_text_message(message):
     if content.strip() == '测试回复':
         # count = len(list(quality_questions))
         # answer = 1
-        WeiXin_Server.send_text_message(openid, """问题1：学校还没开学，但新生群已经非常活跃，你看着以每秒十条的速度递增的消息，心想：
+        response = WeiXin_Server.send_text_message(openid, """问题1：学校还没开学，但新生群已经非常活跃，你看着以每秒十条的速度递增的消息，心想：
 
 A.我就看看，不说话
 B.哇这个人好厉害，我要跟她social一波
@@ -65,7 +65,7 @@ C.（默默打开ins，facebook...）""")
         #         WeixinServer.send_text_message(openid, '哦豁，Nelly识别不了你的答案，请输入题目中包含答案对应的序号，如“A、B、C”')
         #     WeixinServer.send_text_message(openid, '恭喜你，已经完成答题')
         # WeixinServer.send_text_message(openid, '稍等片刻，正在为你揭晓答案。。。')
-    return
+    return response.json()
 
 
 # 处理图片信息
