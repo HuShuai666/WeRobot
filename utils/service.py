@@ -40,7 +40,6 @@ class WeixinServer:
             redis_client.set_instance('hu_access_token', res['access_token'])
             return res['access_token']
 
-    @staticmethod
     # def send_text_message(openid, content):
     #     #     """发送文本消息"""
     #     #     json_data = {
