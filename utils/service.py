@@ -52,21 +52,12 @@ class WeixinServer:
     #     #     return data
     def send_text_message(self, openid, content):
         """发送文本消息"""
-        url = "https://api.weixin.qq.com/cgi-bin/message/custom/send"
-        querystring = {
-            "access_token": self.get_access_token}
-
-        payload = (
-                "{\"touser\": \"%s\", \"msgtype\": \"text\",  \"text\": {\"content\": \"%s\" }}" % (
-            openid, content)).encode(
-            'utf-8')
-        headers = {
-            'Content-Type': "application/json",
-            'Cache-Control': "no-cache",
-            'Postman-Token': "3a32082a-0052-5591-5a7e-bf815defb396"
+        url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?%s" % self.get_access_token
+        params = {
+            'openid': openid,
+            'content': content
         }
-
-        response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
+        response = requests.post(url=url, data=json.dumps(params), headers={'Content-Type': 'application/json'})
         return response.json()
 
     # 调用微信接口向用户发送模板消息
