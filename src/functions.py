@@ -58,9 +58,10 @@ def handle_text_message(message):
             if content.strip() in ['A', 'a', 'B', 'b', 'C', 'c']:
                 answer += 1
             else:
-                WeixinServer.send_text_message(openid, '哦豁，Nelly识别不了你的答案，请输入题目中包含答案对应的序号，如“A、B、C”')
-            WeixinServer.send_text_message(openid, '恭喜你，已经完成答题')
-        WeixinServer.send_text_message(openid, '稍等片刻，正在为你揭晓答案。。。')
+        #         WeixinServer.send_text_message(openid, '哦豁，Nelly识别不了你的答案，请输入题目中包含答案对应的序号，如“A、B、C”')
+        #     WeixinServer.send_text_message(openid, '恭喜你，已经完成答题')
+        # WeixinServer.send_text_message(openid, '稍等片刻，正在为你揭晓答案。。。')
+                pass
     return
 
 
