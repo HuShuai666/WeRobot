@@ -53,7 +53,11 @@ def handle_text_message(message):
     if content.strip() == '测试回复':
         # count = len(list(quality_questions))
         # answer = 1
-        WeiXin_Server.send_text_message(openid, quality_questions.get(1))
+        WeiXin_Server.send_text_message('o-f6a0a4fYfj2jX1_gpitnNw6YIw', """问题1：学校还没开学，但新生群已经非常活跃，你看着以每秒十条的速度递增的消息，心想：
+
+A.我就看看，不说话
+B.哇这个人好厉害，我要跟她social一波
+C.（默默打开ins，facebook...）""",)
         # while answer <= count:
         #     if content.strip() in ['A', 'a', 'B', 'b', 'C', 'c']:
         #         answer += 1
