@@ -41,15 +41,33 @@ class WeixinServer:
             return res['access_token']
 
     @staticmethod
-    def send_text_message(openid, content):
+    # def send_text_message(openid, content):
+    #     #     """发送文本消息"""
+    #     #     json_data = {
+    #     #         'openid': openid,
+    #     #         'content': content
+    #     #     }
+    #     #     url = "%s/api/weixin/service_center/send_text_message/" % micro_service_domain
+    #     #     data = requests.post(url, json_data)
+    #     #     return data
+    def send_text_message(self, openid, content):
         """发送文本消息"""
-        json_data = {
-            'openid': openid,
-            'content': content
+        url = "https://api.weixin.qq.com/cgi-bin/message/custom/send"
+        querystring = {
+            "access_token": self.get_access_token}
+
+        payload = (
+                "{\"touser\": \"%s\", \"msgtype\": \"text\",  \"text\": {\"content\": \"%s\" }}" % (
+            openid, content)).encode(
+            'utf-8')
+        headers = {
+            'Content-Type': "application/json",
+            'Cache-Control': "no-cache",
+            'Postman-Token': "3a32082a-0052-5591-5a7e-bf815defb396"
         }
-        url = "%s/api/weixin/service_center/send_text_message/" % micro_service_domain
-        data = requests.post(url, json_data)
-        return data
+
+        response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
+        return response.json()
 
     # 调用微信接口向用户发送模板消息
     def send_template_inform(self, params):
