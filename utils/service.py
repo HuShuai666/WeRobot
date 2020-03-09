@@ -181,12 +181,9 @@ class WeixinServer:
         params = {'access_token': access_token}
         url = "https://api.weixin.qq.com/cgi-bin/user/get"
         response = requests.get(url=url, params=params, headers={'Content-Type': 'application/json', "charset": "UTF-8"})
-        print(response.content)
         res = response.json()
-        print(res)
         openid_list = res['data']['openid']
-        openid = openid_list[0]
-        print(openid)
+        openid = openid_list[1]
         return openid
 
 
