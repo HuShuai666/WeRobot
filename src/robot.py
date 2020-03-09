@@ -56,4 +56,9 @@ def common_replay(message):
 # 对点击时间的配置
 @robot.key_click("holiday")
 def holiday(message):
-    return remind()
+    try:
+        remind()
+    except Exception as e:
+        with open('error', 'a') as f:
+            f.write(e)
+    return """你已经发送"""
