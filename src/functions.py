@@ -65,7 +65,7 @@ C.（默默打开ins，facebook...）""")
         #         WeixinServer.send_text_message(openid, '哦豁，Nelly识别不了你的答案，请输入题目中包含答案对应的序号，如“A、B、C”')
         #     WeixinServer.send_text_message(openid, '恭喜你，已经完成答题')
         # WeixinServer.send_text_message(openid, '稍等片刻，正在为你揭晓答案。。。')
-    return response.json()
+    return response
 
 
 # 处理图片信息
