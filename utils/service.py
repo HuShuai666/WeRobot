@@ -6,17 +6,17 @@ from config.settings import micro_service_domain, APP_ID, APP_SECRET
 from utils.functions import redis_client
 
 
-# 对requests方法的重写  直接获取res的json字符串
-class BaseHttpServer:
-    @staticmethod
-    def get(url, params):
-        res = requests.get(url=url, params=params)
-        return res.json()['data']
-
-    @staticmethod
-    def post(url, json_data):
-        res = requests.post(url=url, json=json_data)
-        return res.json()['data']
+# # 对requests方法的重写  直接获取res的json字符串
+# class BaseHttpServer:
+#     @staticmethod
+#     def get(url, params):
+#         res = requests.get(url=url, params=params)
+#         return res.json()['data']
+#
+#     @staticmethod
+#     def post(url, json_data):
+#         res = requests.post(url=url, json=json_data)
+#         return res.json()['data']
 
 
 class WeixinServer:
@@ -48,7 +48,7 @@ class WeixinServer:
             'content': content
         }
         url = "%s/api/weixin/service_center/send_text_message/" % micro_service_domain
-        data = BaseHttpServer.post(url, json_data)
+        data = requests.post(url, json_data)
         return data
 
     # 调用微信接口向用户发送模板消息
@@ -65,21 +65,21 @@ class WeixinServer:
         """通过code获取网页授权"""
         url = "%s/api/weixin/service_center/code_authorize/" % micro_service_domain
         params = {'code': code}
-        data = BaseHttpServer.get(url, params)
+        data = requests.get(url, params)
         return data
 
     @staticmethod
     def get_web_user_info(openid, access_token):
         """获取网页授权用户信息"""
         url = "%s/api/weixin/service_center/get_web_user_info/" % micro_service_domain
-        data = BaseHttpServer.get(url, {'openid': openid, 'access_token': access_token})
+        data = requests.get(url, {'openid': openid, 'access_token': access_token})
         return data
 
     @staticmethod
     def get_base_user_info(openid, access_token):
         """获取基础的用户信息(非网页授权)"""
         url = "%s/api/weixin/service_center/get_user_info/" % micro_service_domain
-        data = BaseHttpServer.get(url, {'openid': openid, 'access_token': access_token})
+        data = requests.get(url, {'openid': openid, 'access_token': access_token})
         return data
 
     @staticmethod
@@ -91,7 +91,7 @@ class WeixinServer:
             "scene_id": scene_id,
             "expired_time": expired_time
         }
-        data = BaseHttpServer.post(url, json_data)
+        data = requests.post(url, json_data)
         return data['qr_img_url']
 
     @staticmethod
@@ -102,7 +102,7 @@ class WeixinServer:
             "action_name": action_name,
             "scene_id": scene_id,
         }
-        data = BaseHttpServer.post(url, json_data)
+        data = requests.post(url, json_data)
         return data['qr_img_url']
 
     @staticmethod
@@ -113,7 +113,7 @@ class WeixinServer:
             "openid": openid,
             "articles": articles
         }
-        data = BaseHttpServer.post(url, json_data=data)
+        data = requests.post(url, json_data=data)
         return data
 
     @staticmethod
