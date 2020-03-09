@@ -70,7 +70,7 @@ class WeixinServer:
         # }
 
         response = requests.request("POST", url, data=json.dumps(payload), params=querystring)
-        return response.json()
+        return response.json()['data']
 
     # 调用微信接口向用户发送模板消息
     def send_template_inform(self, params):
