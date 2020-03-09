@@ -16,7 +16,7 @@ def handle_text_message(message):
                 "button": [
                     {
                         "type": "view",
-                        "name": "点点",
+                        "name": "兮兮",
                         "url": "http://www.baidu.com/"
 
                     },
@@ -44,6 +44,7 @@ def handle_text_message(message):
 
         url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % hu_access_token
         response = requests.post(url=url, data=json.dumps(params), verify=False)
+
         return """创建菜单成功"""
     return
 
