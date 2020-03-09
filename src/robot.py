@@ -21,8 +21,13 @@ robot = WeRoBot(config=config)
 
 @robot.text
 def text_message(message):
-    text = handle_text_message(message)
-    return text
+    try:
+        text = handle_text_message(message)
+        return text
+    except Exception as f:
+        with open('.\error.txt', 'a') as e:
+            e.write(f)
+        return f
 
 
 @robot.subscribe
