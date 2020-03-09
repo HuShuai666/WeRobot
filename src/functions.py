@@ -13,45 +13,45 @@ def handle_text_message(message):
     content = message.content
     openid = message.source
     hu_access_token = WeixinServer.get_access_token()
-    if content.strip() == '自定义菜单':
-        params = {
-                "button": [
-                    {
-                        "type": "view",
-                        "name": "兮兮",
-                        "url": "http://www.baidu.com/"
+    try:
+        if content.strip() == '自定义菜单':
+            params = {
+                    "button": [
+                        {
+                            "type": "view",
+                            "name": "兮兮",
+                            "url": "http://www.baidu.com/"
 
-                    },
-                    {
-                        "name": "菜单",
-                        "sub_button": [
-                            {
-                                "type": "view",
-                                "name": "百度一下",
-                                "url": "http://www.baidu.com/"
-                            },
-                            {
-                                "type": "click",
-                                "name": "放假",
-                                "key": "holiday"
-                            }]
-                    },
-                    {
-                        "type": "click",
-                        "name": "测试",
-                        "key": "CESHI"
-                     }
-                ]
-            }
+                        },
+                        {
+                            "name": "菜单",
+                            "sub_button": [
+                                {
+                                    "type": "view",
+                                    "name": "百度一下",
+                                    "url": "http://www.baidu.com/"
+                                },
+                                {
+                                    "type": "click",
+                                    "name": "放假",
+                                    "key": "holiday"
+                                }]
+                        },
+                        {
+                            "type": "click",
+                            "name": "测试",
+                            "key": "CESHI"
+                         }
+                    ]
+                }
 
-        url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % hu_access_token
-        response = requests.post(url=url, data=json.dumps(params, ensure_ascii=False).encode('utf-8'), verify=False)
-        if response.status_code != 200:
-            return """创建菜单失败"""
-        else:
-            return """创建成功"""
-    if content.strip() == '测试回复':
-        try:
+            url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % hu_access_token
+            response = requests.post(url=url, data=json.dumps(params, ensure_ascii=False).encode('utf-8'), verify=False)
+            if response.status_code != 200:
+                return """创建菜单失败"""
+            else:
+                return """创建成功"""
+        if content.strip() == '测试回复':
             count = len(list(quality_questions))
             answer = 1
             WeiXin_Server.send_text_message(openid, quality_questions.get(answer))
@@ -63,9 +63,9 @@ def handle_text_message(message):
                 WeiXin_Server.send_text_message(openid, """恭喜你，已经完成答题""")
             time.sleep(2)
             WeiXin_Server.send_text_message(openid, """稍等片刻，正在为你揭晓答案。。。""")
-        except Exception as f:
-            with open('error.txt', 'a') as e:
-                e.write(f)
+    except Exception as f:
+        with open('error.txt', 'a') as e:
+            e.write(f)
     return
 
 
