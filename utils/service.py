@@ -49,9 +49,10 @@ class WeixinServer:
     #     #     url = "%s/api/weixin/service_center/send_text_message/" % micro_service_domain
     #     #     data = requests.post(url, json_data)
     #     #     return data
-    def send_text_message(self, openid, content):
+    @staticmethod
+    def send_text_message(openid, content):
         """发送文本消息"""
-        url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?%s" % self.get_access_token
+        url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?%s" % WeixinServer.get_access_token
         params = {
             'openid': openid,
             'content': content
