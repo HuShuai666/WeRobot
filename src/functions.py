@@ -2,7 +2,7 @@
 import logging
 import requests
 from utils.service import WeixinServer
-
+import json
 logger = logging.getLogger('info')
 
 
@@ -15,9 +15,10 @@ def handle_text_message(message):
         params = {
                 "button": [
                     {
-                        "type": "click",
+                        "type": "view",
                         "name": "点点",
-                        "key": "DIANDIAN"
+                        "url": "http://www.baidu.com/"
+
                     },
                     {
                         "name": "菜单",
@@ -42,8 +43,7 @@ def handle_text_message(message):
             }
 
         url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % hu_access_token
-        response = requests.post(url=url, params=params, verify=False)
-        print(response.status_code)
+        response = requests.post(url=url, data=json.dumps(params), verify=False)
         return """创建菜单成功"""
     return
 

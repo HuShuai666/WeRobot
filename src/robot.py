@@ -62,3 +62,8 @@ def holiday(message):
         with open('error', 'a') as f:
             f.write(e)
     return """你已经发送"""
+
+
+@robot.key_click("CESHI")
+def ce_shi(message):
+    return """什么都没有，你还点我干啥"""
