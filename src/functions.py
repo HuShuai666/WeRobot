@@ -53,7 +53,7 @@ def handle_text_message(message):
     if content.strip() == '测试回复':
         count = len(list(quality_questions))
         answer = 1
-        WeiXin_Server.send_text_message(openid, quality_questions.get(answer))
+        WeiXin_Server.send_text_message(openid, quality_questions.get(1))
         while answer <= count:
             if content.strip() in ['A', 'a', 'B', 'b', 'C', 'c']:
                 answer += 1
