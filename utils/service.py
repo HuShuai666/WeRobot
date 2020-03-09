@@ -53,7 +53,7 @@ class WeixinServer:
         """发送文本消息"""
         url = "https://api.weixin.qq.com/cgi-bin/message/custom/send"
         querystring = {
-            "access_token": self.get_access_token}
+            "access_token": WeixinServer.get_access_token()}
 
         payload = {
                     "touser": openid,
