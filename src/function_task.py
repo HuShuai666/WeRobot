@@ -7,8 +7,8 @@ import json
 
 def quality_test(content, openid):
     if content.strip() == "重新测试":
-        redis_client.hdel('hu_cs', openid)
-        return
+        response = redis_client.hdel('hu_cs', openid)
+        return response
     if redis_client.hexists('hu_cs', openid):
         # 获取redis中用户的答题进度
         qid = int(redis_client.hget('hu_cs', openid)) + 1
@@ -23,5 +23,5 @@ def quality_test(content, openid):
     else:
         redis_client.hset('hu_cs', openid, 1)
         response = WeiXin_Server.send_text_message(openid, quality_questions.get(1))
-    return json.dumps(response)
+    return
 
