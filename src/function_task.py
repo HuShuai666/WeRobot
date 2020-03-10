@@ -7,11 +7,12 @@ import json
 
 def quality_test(content, openid):
     if content.strip() == "重新测试":
-        response = redis_client.hdel('hu_cs', openid)
-        return response
+        redis_client.delete('hu_cs')
+        return
     WeiXin_Server.send_text_message(openid, """1""")
-    if redis_client.hexists('hu_cs', openid):
+    if redis_client.hget('hu_cs', openid):
         WeiXin_Server.send_text_message(openid, """2""")
+        WeiXin_Server.send_text_message(openid, f'{openid}')
         # 获取redis中用户的答题进度
         qid = int(redis_client.hget('hu_cs', openid)) + 1
         if qid == 9:
