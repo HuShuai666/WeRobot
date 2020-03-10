@@ -52,9 +52,9 @@ def handle_text_message(message):
         else:
             return """创建成功"""
     if content.strip() == '测试回复':
-        qid = int(redis_client.hget('hu_cs', openid)) + 1
         # 如果redis中存在该用户的题号 就向微信发送问题
-        if qid:
+        if redis_client.hget('hu_cs', openid):
+            qid = int(redis_client.hget('hu_cs', openid)) + 1
             # 如果答案标准
             if content.strip() in ['A', 'a', 'B', 'b', 'C', 'c']:
                 redis_client.hset('hu_cs', openid, qid)
