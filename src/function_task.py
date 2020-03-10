@@ -6,6 +6,9 @@ import json
 
 
 def quality_test(content, openid):
+    if content.strip() == "重新测试":
+        redis_client.hdel('hu_cs', openid)
+        return
     if redis_client.hexists('hu_cs', openid):
         # 获取redis中用户的答题进度
         qid = int(redis_client.hget('hu_cs', openid)) + 1
