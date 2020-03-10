@@ -2,6 +2,8 @@
 import logging
 import requests
 import time
+
+from src.function_task import quality_test
 from src.qualities_reply import quality_questions
 from utils.redis_helper import redis_client
 from utils.service import WeixinServer, WeiXin_Server
@@ -52,6 +54,7 @@ def handle_text_message(message):
         else:
             return """创建成功"""
     if content.strip() == '测试回复':
+        quality_test(content, openid)
         # # 如果redis中存在该用户的题号 就向微信发送问题
         # if redis_client.hget('hu_cs', openid):
         #     qid = int(redis_client.hget('hu_cs', openid)) + 1
@@ -64,9 +67,9 @@ def handle_text_message(message):
         #     if qid == 9:
         #         response = WeiXin_Server.send_text_message(openid, '恭喜你，已经完成答题')
         # else:
-        redis_client.hset('hu_cs', openid, 1)
-        response = WeiXin_Server.send_text_message(openid, quality_questions.get(1))
-        return json.dumps(response)
+        # redis_client.hset('hu_cs', openid, 1)
+        # response = WeiXin_Server.send_text_message(openid, quality_questions.get(1))
+        # return json.dumps(response)
     return
 
 

@@ -119,6 +119,9 @@ class RedisClient:
     def hlen(self,name):
         return self.redis_client.hlen(name)
 
+    def hexists(self,name, key):
+        return self.redis_client.hexists(name, key)
+
     def hset(self, name, key, value):
         """在name对应的集合中添加某些值（hash类型数据操作）"""
         return self.redis_client.hset(name, key, value)
