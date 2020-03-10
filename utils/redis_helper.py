@@ -2,11 +2,11 @@
 import redis
 
 
-redis_valid_time = 60 * 60
+redis_valid_time = 60 * 2
 
 REDIS_CONFIG = {
-    'host':'localhost',
-    'port':6379
+    'host': 'localhost',
+    'port': 6379
 }
 
 
@@ -119,9 +119,9 @@ class RedisClient:
     def hlen(self,name):
         return self.redis_client.hlen(name)
 
-    def hset(self, name, key, value):
+    def hset(self, name, key, value, expire=None):
         """在name对应的集合中添加某些值（hash类型数据操作）"""
-        return self.redis_client.hset(name, key, value)
+        return self.redis_client.hset(name, key, value, expire)
 
     def hmset(self, name, mapping):
         """在name对应的集合中批量添加某些值（hash类型数据操作）"""

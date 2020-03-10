@@ -21,7 +21,7 @@ from utils.functions import redis_client
 
 class WeixinServer:
     """微信公众号服务"""
-
+    """静态方法 能用实例和类名调用"""
     @staticmethod
     def get_access_token():
         """获取access_token"""
@@ -49,6 +49,9 @@ class WeixinServer:
     #     #     url = "%s/api/weixin/service_center/send_text_message/" % micro_service_domain
     #     #     data = requests.post(url, json_data)
     #     #     return data
+    """实例方法  调用时需要用类的实例来调用  否则不成功
+       类方法应当只被类调用，实例方法实例调用，静态方法两者都能调用   
+    """
     def send_text_message(self, openid, content):
         """发送文本消息"""
         url = "https://api.weixin.qq.com/cgi-bin/message/custom/send"

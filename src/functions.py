@@ -3,6 +3,7 @@ import logging
 import requests
 import time
 from src.qualities_reply import quality_questions
+from utils.redis_helper import redis_client
 from utils.service import WeixinServer, WeiXin_Server
 import json
 logger = logging.getLogger('info')
@@ -51,20 +52,20 @@ def handle_text_message(message):
         else:
             return """创建成功"""
     if content.strip() == '测试回复':
-        # count = len(list(quality_questions))
-        # answer = 1
-        response = WeiXin_Server.send_text_message(openid, """问题1：学校还没开学，但新生群已经非常活跃，你看着以每秒十条的速度递增的消息，心想：
-
-A.我就看看，不说话
-B.哇这个人好厉害，我要跟她social一波
-C.（默默打开ins，facebook...）""")
-        # while answer <= count:
-        #     if content.strip() in ['A', 'a', 'B', 'b', 'C', 'c']:
-        #         answer += 1
-        #     else:
-        #         WeixinServer.send_text_message(openid, '哦豁，Nelly识别不了你的答案，请输入题目中包含答案对应的序号，如“A、B、C”')
-        #     WeixinServer.send_text_message(openid, '恭喜你，已经完成答题')
-        # WeixinServer.send_text_message(openid, '稍等片刻，正在为你揭晓答案。。。')
+        qid = int(redis_client.hget('hu_cs', openid)) + 1
+        # 如果redis中存在该用户的题号 就向微信发送问题
+        if qid:
+            # 如果答案标准
+            if content.strip() in ['A', 'a', 'B', 'b', 'C', 'c']:
+                redis_client.hset('hu_cs', openid, qid)
+                response = WeiXin_Server.send_text_message(openid, quality_questions.get(qid))
+            else:
+                WeiXin_Server.send_text_message(openid, '哦豁，Nelly识别不了你的答案，请输入题目中包含答案对应的序号，如“A、B、C”')
+            if qid == 9:
+                WeiXin_Server.send_text_message(openid, '恭喜你，已经完成答题')
+        else:
+            redis_client.hset('hu_cs', openid, 1, 60*2)
+            response = WeiXin_Server.send_text_message(openid, quality_questions.get(1))
     return json.dumps(response)
 
 
