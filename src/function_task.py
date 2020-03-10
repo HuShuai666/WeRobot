@@ -8,7 +8,7 @@ import json
 def quality_test(content, openid):
     if content.strip() == "重新测试":
         redis_client.delete('hu_cs')
-        return
+        return """redis已经删除"""
     WeiXin_Server.send_text_message(openid, """1""")
     if redis_client.hget('hu_cs', openid):
         WeiXin_Server.send_text_message(openid, """2""")
