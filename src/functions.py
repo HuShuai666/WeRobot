@@ -60,13 +60,13 @@ def handle_text_message(message):
                 redis_client.hset('hu_cs', openid, qid)
                 response = WeiXin_Server.send_text_message(openid, quality_questions.get(qid))
             else:
-                WeiXin_Server.send_text_message(openid, '哦豁，Nelly识别不了你的答案，请输入题目中包含答案对应的序号，如“A、B、C”')
+                response = WeiXin_Server.send_text_message(openid, '哦豁，Nelly识别不了你的答案，请输入题目中包含答案对应的序号，如“A、B、C”')
             if qid == 9:
-                WeiXin_Server.send_text_message(openid, '恭喜你，已经完成答题')
+                response = WeiXin_Server.send_text_message(openid, '恭喜你，已经完成答题')
         else:
             redis_client.hset('hu_cs', openid, 1)
             response = WeiXin_Server.send_text_message(openid, quality_questions.get(1))
-    return
+    return json.dumps(response)
 
 
 # 处理图片信息
