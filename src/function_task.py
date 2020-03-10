@@ -8,7 +8,7 @@ import json
 def quality_test(content, openid):
     if redis_client.hexists('hu_cs', openid):
         # 获取redis中用户的答题进度
-        qid = redis_client.hget('hu_cs', openid) + 1
+        qid = int(redis_client.hget('hu_cs', openid)) + 1
         if qid == 9:
             response = WeiXin_Server.send_text_message(openid, """答题完毕！！！""")
             return
