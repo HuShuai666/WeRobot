@@ -55,6 +55,8 @@ def handle_text_message(message):
             return """创建成功"""
     if content.strip() == '测试回复':
         response = quality_test(content, openid)
+    if redis_client.exist_key('hu_cs'):
+        quality_test(content, openid)
     if content.strip() == "重新测试":
         redis_client.delete('hu_cs')
         return

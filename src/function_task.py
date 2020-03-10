@@ -6,14 +6,12 @@ import json
 
 
 def quality_test(content, openid):
-    WeiXin_Server.send_text_message(openid, """1""")
     if redis_client.hget('hu_cs', openid):
-        WeiXin_Server.send_text_message(openid, """2""")
-        WeiXin_Server.send_text_message(openid, f'{openid}')
         # 获取redis中用户的答题进度
         qid = int(redis_client.hget('hu_cs', openid)) + 1
         if qid == 9:
             response = WeiXin_Server.send_text_message(openid, """答题完毕！！！""")
+            return
         if content.strip() in ['A', 'a', 'B', 'b', 'C', 'c']:
             response = WeiXin_Server.send_text_message(openid, quality_questions.get(qid))
             redis_client.hset('hu_cs', openid, qid)
