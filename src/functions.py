@@ -64,7 +64,7 @@ def handle_text_message(message):
             if qid == 9:
                 WeiXin_Server.send_text_message(openid, '恭喜你，已经完成答题')
         else:
-            redis_client.hset('hu_cs', openid, 1, 60*2)
+            redis_client.hset('hu_cs', openid, 1)
             response = WeiXin_Server.send_text_message(openid, quality_questions.get(1))
     return json.dumps(response)
 

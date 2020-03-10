@@ -119,9 +119,9 @@ class RedisClient:
     def hlen(self,name):
         return self.redis_client.hlen(name)
 
-    def hset(self, name, key, value, expire=None):
+    def hset(self, name, key, value, default_valid_time=redis_valid_time):
         """在name对应的集合中添加某些值（hash类型数据操作）"""
-        return self.redis_client.hset(name, key, value, expire)
+        return self.redis_client.hset(name, key, value, default_valid_time)
 
     def hmset(self, name, mapping):
         """在name对应的集合中批量添加某些值（hash类型数据操作）"""
