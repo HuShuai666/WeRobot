@@ -69,7 +69,6 @@ def handle_text_message(message):
         # else:
         # redis_client.hset('hu_cs', openid, 1)
         # response = WeiXin_Server.send_text_message(openid, quality_questions.get(1))
-        return json.dumps(response)
     return
 
 

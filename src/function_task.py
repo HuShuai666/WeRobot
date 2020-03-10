@@ -24,3 +24,4 @@ def quality_test(content, openid):
     else:
         redis_client.hset('hu_cs', openid, 1)
         response = WeiXin_Server.send_text_message(openid, quality_questions.get(1))
+    return
