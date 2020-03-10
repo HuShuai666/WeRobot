@@ -73,8 +73,7 @@ class RedisClient:
 
     def delete(self, key):
         """删除键值对（string类型数据操作）"""
-        self.redis_client.delete(key)
-        return
+        return self.redis_client.delete(key)
 
     def incr_instance(self, key, amount=1):
         """根据key自增amount（string类型数据操作）"""
