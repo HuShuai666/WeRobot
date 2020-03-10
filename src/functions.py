@@ -53,13 +53,13 @@ def handle_text_message(message):
             return """创建菜单失败"""
         else:
             return """创建成功"""
+    if content.strip() == "重新测试":
+        redis_client.delete('hu_cs')
+        return
     if content.strip() == '测试回复':
         response = quality_test(content, openid)
     if redis_client.exist_key('hu_cs'):
         quality_test(content, openid)
-    if content.strip() == "重新测试":
-        redis_client.delete('hu_cs')
-        return
         # # 如果redis中存在该用户的题号 就向微信发送问题
         # if redis_client.hget('hu_cs', openid):
         #     qid = int(redis_client.hget('hu_cs', openid)) + 1
