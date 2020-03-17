@@ -2,8 +2,8 @@ from config.settings import TEMPLATE_INFO
 from .service import WeiXin_Server
 
 
-def remind():
-    openid = WeiXin_Server.get_openid()
+def remind(message):
+    openid = message.source
     data = {
         "touser": openid,
         "template_id": TEMPLATE_INFO['REMIND'],

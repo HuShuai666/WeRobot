@@ -57,7 +57,7 @@ def common_replay(message):
 @robot.key_click("holiday")
 def holiday(message):
     try:
-        remind()
+        remind(message)
     except Exception as e:
         with open('error', 'a') as f:
             f.write(e)

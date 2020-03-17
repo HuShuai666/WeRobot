@@ -57,9 +57,9 @@ def handle_text_message(message):
         redis_client.delete('hu_cs')
         return
     elif content.strip() == '测试回复':
-        response = quality_test(content, openid)
+        response = quality_test(content, openid, hu_access_token)
     elif redis_client.exist_key('hu_cs'):
-        quality_test(content, openid)
+        quality_test(content, openid, hu_access_token)
         # # 如果redis中存在该用户的题号 就向微信发送问题
         # if redis_client.hget('hu_cs', openid):
         #     qid = int(redis_client.hget('hu_cs', openid)) + 1
