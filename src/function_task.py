@@ -3,7 +3,7 @@ from celery_task.tasks import upload_medias
 from src.qualities_reply import quality_questions
 from utils.redis_helper import redis_client
 from utils.service import WeiXin_Server
-import json
+import time
 
 
 def quality_test(content, openid, hu_access_token):
